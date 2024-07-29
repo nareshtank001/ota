@@ -1,0 +1,20 @@
+{
+    "job": {
+        "success": "true",
+        "data": [
+            {
+                "id": 1,
+                "type": "RESTORE",
+                "sqlQuery": "SELECT * FROM rev1_test LIMIT 1",
+                "dbConfig": {
+                    "host": "localhost1",
+                    "port": "5432",
+                    "user": "postgres",
+                    "password": "avesta1",
+                    "database": "test"
+                },
+                "backupFile": ""
+            }
+        ]
+    }
+}
