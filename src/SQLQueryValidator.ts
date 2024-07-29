@@ -11,4 +11,15 @@ export class SQLQueryValidator implements QueryValidator {
             return false;
         }
     }
+
+    isValidSelectQuery(query: string): boolean {
+        const parser = new Parser();
+        try {
+            const whiteTableList = ["select::(.*)::(.*)"];
+            parser.whiteListCheck(query, whiteTableList);
+            return true;
+        } catch (error) {
+            return false;
+        }
+    }
 }

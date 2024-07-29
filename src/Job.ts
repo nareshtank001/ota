@@ -1,3 +1,4 @@
+import { Query } from "./Query";
 import { BaseError } from "./BaseError";
 import { Database } from "./Database";
 import { JobType } from "./JobType";
@@ -8,18 +9,18 @@ export interface JobProps {
     id: number;
     type: JobType;
     database: Database;
-    sqlQuery: string;
+    sqlQuery: Query;
     backupFile?: string;
-    auditQueries?: string;
+    auditQueries?: Query;
 }
 
 export class Job {
     private id: number;
     private type: JobType = JobType.ExecuteSQL;
     private database: Database;
-    private sqlQuery: string = "";
+    private sqlQuery: Query;
     private backupFile?: string;
-    private auditQueries?: string;
+    private auditQueries?: Query;
 
     private constructor(jobProps: JobProps) {
         this.id = jobProps.id;
@@ -42,21 +43,16 @@ export class Job {
         return this.database;
     }
 
-    getSqlQuery(): string {
+    getSqlQuery(): Query {
         return this.sqlQuery;
     }
+    getAduitQueries(): Query | undefined {
+        return this.auditQueries;
+    }
 
-    static create(jobProps: JobProps, queryValidator: QueryValidator, interpolator: QueryInterpolator): Job {
+    static create(jobProps: JobProps): Job {
         if (!Job.isValidJobType(jobProps.type)) {
             throw new BaseError("JOB_ERROR", "Invalid Job Type");
-        }
-
-        if (!queryValidator.isValid(jobProps.sqlQuery)) {
-            throw new BaseError("JOB_ERROR", "Invalid SQL query");
-        }
-
-        if (jobProps.sqlQuery !== "") {
-            jobProps.sqlQuery = interpolator.interpolate(jobProps.sqlQuery);
         }
 
         return new Job(jobProps);

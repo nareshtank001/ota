@@ -19,8 +19,15 @@ export class JobExecuter {
     async runExecuteSQLJob(job: Job): Promise<void> {
         const database: Database = job.getDatabase();
         await database.testConnection();
-        const query = job.getSqlQuery();
+
+        const query: string = job.getSqlQuery().getValue();
         await database.executeQuery(query);
+
+        const auditQuery = job.getAduitQueries()?.getValue();
+        if (auditQuery) {
+            await database.executeQuery(auditQuery);
+        }
+
         console.log("Job Executed Successfully");
     }
 
