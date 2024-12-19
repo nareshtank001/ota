@@ -7,7 +7,7 @@
                 "type": "RESTORE",
                 "sqlQuery": "SELECT * FROM rev1_test LIMIT 1",
                 "dbConfig": {
-                    "host": "localhost1",
+                    "host": "localhost1123",
                     "port": "5432",
                     "user": "postgres",
                     "password": "avesta1",
