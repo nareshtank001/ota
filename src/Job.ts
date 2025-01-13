@@ -55,6 +55,10 @@ export class Job {
             throw new BaseError("JOB_ERROR", "Invalid Job Type");
         }
 
+        if (!Job.isValidJobType(jobProps.type)) {
+            throw new BaseError("JOB_ERROR", "Invalid Job Type");
+        }
+
         return new Job(jobProps);
     }
 
