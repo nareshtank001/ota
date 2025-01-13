@@ -23,7 +23,7 @@ export class JobExecuter {
         const query: string = job.getSqlQuery().getValue();
         await database.executeQuery(query);
 
-        const auditQuery = job.getAduitQueries()?.getValue();
+        const auditQuery = job.getAduitQueries();
         if (auditQuery) {
             await database.executeQuery(auditQuery);
         }
