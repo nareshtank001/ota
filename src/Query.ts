@@ -19,7 +19,7 @@ export class Query {
             throw new BaseError("QUERY_ERROR", "SQL should not be blank");
         }
 
-        if (this.isInterpolationNeeded(value)) {
+        if (this.interpolationNeeded(value)) {
             value = interpolator.interpolate(value);
         }
 
@@ -30,7 +30,7 @@ export class Query {
         return new Query(value);
     }
 
-    static isInterpolationNeeded(query: string): boolean {
+    static interpolationNeeded(query: string): boolean {
         return /\{\{(\w+)\}\}/.test(query);
     }
 }
