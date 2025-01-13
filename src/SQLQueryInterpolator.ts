@@ -14,6 +14,11 @@ export class SQLQueryInterpolator implements QueryInterpolator {
             if (value === undefined) {
                 throw new Error(`Missing environment variable: ${key}`);
             }
+
+            if (value === null) {
+                throw new Error(`Missing environment variable: ${key}`);
+            }
+            
             return value;
         });
     }
